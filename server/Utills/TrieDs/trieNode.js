@@ -5,40 +5,32 @@ function createNode(ch){
     this.map={};
   }
   
-  function insert(word,index,root,path){
+  function insert(word,root,path){
     
-    //base case
-    if(index>=word.length)
+    for(index=0;index<word.length;index++)
     {
-      root.isEnd=true;
-      root.rootFilePath=path;
-      return;
+        if(!root.map[word[index]])
+        {
+          root.map[word[index]]=new createNode(word[index],"");
+        }
+        root=root.map[word[index]];
     }
-  
-    if(!root.map[word[index]])
-    {
-      root.map[word[index]]=new createNode(word[index],"");
-    }
-    
-    insert(word, index+ 1, root.map[word[index]],path);
-   
+    root.isEnd=true;
+    root.rootFilePath=path;
   }
   
-  
-  function search(word, index, root) {
-    if(index===word.length)
+  function search(word,root) {
+    for(index=0;index<word.length;index++)
     {
-      if(root.isEnd)
+        if(!root.map[word[index]])
+        {
+          return "Not Found";
+        }
+        root=root.map[word[index]];
+    }
+    if(root.isEnd)
       return root.rootFilePath;
       return "Not Found"
-    }
-  
-    if(!root.map[word[index]])
-    {
-      return "Not Found"
-    }
-    
-    return search(word, index+ 1, root.map[word[index]]);
   }
   
   modules.export={createNode,insert,search}
