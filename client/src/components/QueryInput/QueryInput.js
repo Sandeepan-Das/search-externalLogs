@@ -41,7 +41,7 @@ const QueryInput = () => {
 
   return (
     <Container>
-      <h1>Add File(s)</h1>
+      <h2>Add File(s)</h2>
       <form className={classes.root} onSubmit={handleSubmit}>
         { queryInputs.map(queryInput => (
           <div key={queryInput.id}>

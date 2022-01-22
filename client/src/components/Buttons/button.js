@@ -1,25 +1,29 @@
 import React from 'react'
-import './button.css';
+import { Container, Button } from '@material-ui/core';
 
-function Button(){
+function fileUpload(){
   
 
   return(
-    <div className='one'>
-      <div className='ip'>
-        <input type="file" name="file_upload"/>
-        </div>
+    <Container>
+          <label className='label'>Select a Zip Folder</label>
+          <br />
+          <input
+           // onChange={handleFileReader}                
+            type="file"
+            accept=".zip,.rar,.7zip"
+          />
+          <Button variant="contained" color="primary">Insert File</Button>
+          <Button variant="contained" color="primary">Build</Button>
+      
+        
+    </Container>
+          
       
       
-        <button>Insert File</button>
-  
-      
-        <button type='submit'>BUILD</button>
-      
-      
-    </div>
+    
 
   );
 }
 
-export default Button;
+export default fileUpload;
