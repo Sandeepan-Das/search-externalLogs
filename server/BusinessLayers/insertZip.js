@@ -1,8 +1,9 @@
 const multer = require("multer");
+const diskStorage = "./SampleData";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./SampleData");
+    cb(null, diskStorage);
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
