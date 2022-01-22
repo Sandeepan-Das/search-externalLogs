@@ -10,5 +10,6 @@ router.post("/insert", insertZip);
 router.get("/build", buildZip);
 
 //search query
+router.post("/search");
 
 module.exports = router;
