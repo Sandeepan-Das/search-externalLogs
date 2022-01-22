@@ -33,4 +33,4 @@ function createNode(ch){
       return "Not Found"
   }
   
-  modules.export={createNode,insert,search}
+  module.exports={createNode,insert,search}
