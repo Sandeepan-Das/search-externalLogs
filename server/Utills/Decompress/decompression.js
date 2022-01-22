@@ -5,8 +5,8 @@ const deleteDir = require("del");
 const util = require('util')
 
 const { parsing } = require("../Parse/parser");
-const {createNode,insert,search} = require("../TrieDs/trieNode")
-
+const {createNode,insert} = require("../TrieDs/trieNode")
+const {subDecompress} = require("./subDecompress")
 const root = new createNode('');
 
 
@@ -17,21 +17,22 @@ const decompression = async (dataFolder, distFolder) => {
     const folders = fs.readdirSync(dataFolder);
 
     for (const folder of folders) {
-      const files = await decompress(`${dataFolder}/${folder}`, distFolder);
-      for (const xmlFile of files) {
-        if (xmlFile.type === "file") {
-          if (xmlFile.path.endsWith(".zip")) {
-            const newSubFile = await unzipSubFiles(distFolder, xmlFile.path);
-            for (const subFile of newSubFile) {
-              // subFile.path = xmlFile.path.concat(subFile.path)  //optimize this
-              files.push(subFile);
-            }
-          } else {
-            xmlFilePath.push(xmlFile.path);
-          }
-        }
-      }
-
+      // const files = await decompress(`${dataFolder}/${folder}`, distFolder);
+      // for (const xmlFile of files) {
+      //   if (xmlFile.type === "file") {
+      //     if (xmlFile.path.endsWith(".zip")) {
+      //       const newSubFile = await unzipSubFiles(distFolder, xmlFile.path);
+      //       for (const subFile of newSubFile) {
+      //         // subFile.path = xmlFile.path.concat(subFile.path)  //optimize this
+      //         files.push(subFile);
+      //       }
+      //     } else {
+      //       xmlFilePath.push(xmlFile.path);
+      //     }
+      //   }
+      // }
+      xmlFilePath = await subDecompress(dataFolder,folder,distFolder)
+      
       //Parsing
       for (const xmlFile of xmlFilePath) {
         
@@ -53,11 +54,7 @@ const decompression = async (dataFolder, distFolder) => {
     console.log(error);
   }
 };
-const unzipSubFiles = async (distFolder, pathSubFile) => {
-  const files = await decompress(`./${distFolder}/${pathSubFile}`, distFolder); //check path
 
-  return files;
-};
 module.exports = {
-  decompression,
+  decompression,root
 };
