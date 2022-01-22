@@ -15,7 +15,8 @@ function FileUpload(){
         };
     }
     const uploadHandler = async () => {
-       await axios.post('http://localhost:5000/insert', uploadFile);
+      const { data } = await axios.post('http://localhost:5000/insert', uploadFile);
+      //console.log(data);
     };
     const buildHandler = async () => {
        await axios.post('http://localhost:5000/build');
@@ -24,6 +25,7 @@ function FileUpload(){
     <Container>
           <h2>Select a Zip Folder</h2>
           <input
+          name='zip'
            onChange={handleFileReader}                
             type="file"
             accept=".zip"
