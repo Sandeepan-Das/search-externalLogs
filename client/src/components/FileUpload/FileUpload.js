@@ -15,11 +15,15 @@ function FileUpload(){
         };
     }
     const uploadHandler = async () => {
-      const { data } = await axios.post('http://localhost:5000/insert', uploadFile);
+      const { data } = await axios.post('http://localhost:5000/insert', uploadFile, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+    });
       //console.log(data);
     };
     const buildHandler = async () => {
-       await axios.post('http://localhost:5000/build');
+       await axios.get('http://localhost:5000/build');
     };
   return(
     <Container>

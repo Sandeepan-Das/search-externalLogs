@@ -3,7 +3,7 @@ import { Container, TextField, Button, IconButton, Icon } from '@material-ui/cor
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import { v4 as uuidv4 } from 'uuid';
-
+import axios from 'axios';
 import useStyles from './styles';
 
 
@@ -15,7 +15,9 @@ const QueryInput = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data } = await axios.post('http://localhost:5000/search', inputQuery);
+    const { data } = await axios.post('http://localhost:5000/search', {inputQuery});
+    console.log(data);
+    
   };
 
   const handleChangeInput = (id, event) => {
@@ -68,7 +70,6 @@ const QueryInput = () => {
           color="primary" 
           type="submit" 
           endIcon={<Icon>send</Icon>}
-          onClick={handleSubmit}
         >Send</Button>
       </form>
     </Container>
