@@ -2,13 +2,12 @@ const decompress = require("decompress");
 const path = require("path");
 const fs = require("fs");
 const deleteDir = require("del");
-const util = require('util')
+const util = require("util");
 
 const { parsing } = require("../Parse/parser");
-const {createNode,insert} = require("../TrieDs/trieNode")
-const {subDecompress} = require("./subDecompress")
-const root = new createNode('');
-
+const { createNode, insert } = require("../TrieDs/trieNode");
+const { subDecompress } = require("./subDecompress");
+const root = new createNode("");
 
 const decompression = async (dataFolder, distFolder) => {
   var xmlFilePath = [];
@@ -17,44 +16,32 @@ const decompression = async (dataFolder, distFolder) => {
     const folders = fs.readdirSync(dataFolder);
 
     for (const folder of folders) {
-      // const files = await decompress(`${dataFolder}/${folder}`, distFolder);
-      // for (const xmlFile of files) {
-      //   if (xmlFile.type === "file") {
-      //     if (xmlFile.path.endsWith(".zip")) {
-      //       const newSubFile = await unzipSubFiles(distFolder, xmlFile.path);
-      //       for (const subFile of newSubFile) {
-      //         // subFile.path = xmlFile.path.concat(subFile.path)  //optimize this
-      //         files.push(subFile);
-      //       }
-      //     } else {
-      //       xmlFilePath.push(xmlFile.path);
-      //     }
-      //   }
-      // }
-      xmlFilePath = await subDecompress(dataFolder,folder,distFolder)
-      
+      xmlFilePath = await subDecompress(dataFolder, folder, distFolder);
+      console.log(xmlFilePath);
       //Parsing
       for (const xmlFile of xmlFilePath) {
-        
-        let match = await parsing(distFolder, xmlFile);
-        
-        if (match == folder.split(".")[0]) {
-          insert(folder.split(".")[0],root,`./${distFolder}/${xmlFile}`)
-          console.log(util.inspect(root, false, null, true /* enable colors */))
-          //trie
-        }
+          let match = await parsing(distFolder, xmlFile.path);
+
+          if (match == folder.split(".")[0]) {
+            //trie
+        insert(
+          folder.split(".")[0],
+          root,
+          `./${distFolder}/${xmlFile.finalPath}`
+        );
+          }
       }
       xmlFilePath = [];
+      delete dir
       await deleteDir(`./${distFolder}`)
-      
     }
-    
-    
+    console.log(util.inspect(root, false, null, true /* enable colors */));
   } catch (error) {
     console.log(error);
   }
 };
 
 module.exports = {
-  decompression,root
+  decompression,
+  root,
 };
