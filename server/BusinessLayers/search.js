@@ -18,6 +18,7 @@ const searchZip = async function (req, res) {
       result.time = xmlFilePath.time
       }
     }
+    console.log(result)
     res.status(200).send(result);
   } catch (error) {
     console.log(error);
