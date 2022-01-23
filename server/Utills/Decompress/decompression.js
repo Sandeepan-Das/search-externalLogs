@@ -19,17 +19,18 @@ const decompression = async (dataFolder, distFolder) => {
       if(search(folder.split(".")[0],root)=="Not Found"){
 
         xmlFilePath = await subDecompress(dataFolder, folder, distFolder);
-        console.log(xmlFilePath);
+        
         //Parsing
         for (const xmlFile of xmlFilePath) {
             let match = await parsing(distFolder, xmlFile.path);
   
             if (match == folder.split(".")[0]) {
               //trie
+             
           insert(
             folder.split(".")[0],
             root,
-            `${xmlFile.finalPath}`
+            {path:`${xmlFile.finalPath}`,time:xmlFile.mtime}
           );
             }
         }

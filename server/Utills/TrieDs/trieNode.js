@@ -1,7 +1,7 @@
 function createNode(ch){
     this.ch=ch;
     this.isEnd=false;
-    this.rootFilePath="";
+    this.rootFilePath={};
     this.map={};
   }
   
