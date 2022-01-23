@@ -25,7 +25,7 @@ const unzipSubFiles = async (distFolder, pathSubFile) => {
     `./${distFolder}/${pathSubFile}.zip`,
     distFolder
   ); //check path
-
+  
   return files;
 };
 

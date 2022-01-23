@@ -11,10 +11,11 @@ const searchZip = async function (req, res) {
     var result;
     for (const zipName of req.body.inputQuery) {
       xmlFilePath = search(zipName.query, root); //Try to extract the file without unzipping the folder
-
+      console.log(xmlFilePath)
       zipName.query = zipName.query.concat(".zip");
       if (xmlFilePath != "Not Found") {
-      result=  await serchDecompress(xmlFilePath, distFolder, zipName.query,testFolder);
+      result=  await serchDecompress(xmlFilePath.path, distFolder, zipName.query,testFolder);
+      result.time = xmlFilePath.time
       }
     }
     res.status(200).send(result);
