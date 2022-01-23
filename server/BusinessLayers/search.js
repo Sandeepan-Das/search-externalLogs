@@ -21,6 +21,7 @@ const searchZip = async function (req, res) {
       result[zipName.query]="Not Found";
     }
     }
+    console.log(result)
     res.status(200).send(result);
   } catch (error) {
     console.log(error);
