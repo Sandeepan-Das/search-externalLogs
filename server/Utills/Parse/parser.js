@@ -12,5 +12,5 @@ const parsing = async (distFolder, fileLocation) => {
   
   return data.substring((match1[0]+term.length-1)+2,match2[0]-1);
 };
-
+//check
 module.exports = { parsing };
