@@ -19,7 +19,7 @@ function constructPiTable(pattern){
   return lps;
 }
 
-function KmpPatternMatching(text,pattern){
+async function KmpPatternMatching(text,pattern){
     n=text.length;
     m=pattern.length;
     var lps=constructPiTable(pattern);
