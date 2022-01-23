@@ -3,56 +3,58 @@ import { Container, TextField, Button, IconButton, Icon } from '@material-ui/cor
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import { v4 as uuidv4 } from 'uuid';
-
+import axios from 'axios';
 import useStyles from './styles';
 
 
 const QueryInput = () => {
   const classes = useStyles()
-  const [queryInputs, setQueryInputs] = useState([
-    { id: uuidv4(), fileName: '' },
+  const [inputQuery, setinputQuery] = useState([
+    { id: uuidv4(), query: '' },
   ]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("QueryInputs", queryInputs);
+    const { data } = await axios.post('http://localhost:5000/search', {inputQuery});
+    console.log(data);
+    
   };
 
   const handleChangeInput = (id, event) => {
-    const newQueryInputs = queryInputs.map(i => {
+    const newinputQuery = inputQuery.map(i => {
       if(id === i.id) {
         i[event.target.name] = event.target.value
       }
       return i;
     })
     
-    setQueryInputs(newQueryInputs);
+    setinputQuery(newinputQuery);
   }
 
   const handleAddField = () => {
-    setQueryInputs([...queryInputs, { id: uuidv4(),  fileName: '' }])
+    setinputQuery([...inputQuery, { id: uuidv4(),  query: '' }])
   }
 
   const handleRemoveField = id => {
-    const values  = [...queryInputs];
+    const values  = [...inputQuery];
     values.splice(values.findIndex(value => value.id === id), 1);
-    setQueryInputs(values);
+    setinputQuery(values);
   }
 
   return (
     <Container>
-      <h1>Add File(s)</h1>
+      <h2>Add File(s)</h2>
       <form className={classes.root} onSubmit={handleSubmit}>
-        { queryInputs.map(queryInput => (
+        { inputQuery.map(queryInput => (
           <div key={queryInput.id}>
             <TextField
-              name="fileName"
+              name="query"
               label="File Name"
               variant="filled"
-              value={queryInput.fileName}
+              value={queryInput.query}
               onChange={event => handleChangeInput(queryInput.id, event)}
             />
-            <IconButton disabled={queryInputs.length === 1} onClick={() => handleRemoveField(queryInput.id)}>
+            <IconButton disabled={inputQuery.length === 1} onClick={() => handleRemoveField(queryInput.id)}>
               <RemoveIcon />
             </IconButton>
             <IconButton
@@ -68,7 +70,6 @@ const QueryInput = () => {
           color="primary" 
           type="submit" 
           endIcon={<Icon>send</Icon>}
-          onClick={handleSubmit}
         >Send</Button>
       </form>
     </Container>

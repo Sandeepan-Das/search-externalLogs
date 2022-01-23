@@ -7,11 +7,12 @@ const distFolder = "dist";
 
 const searchZip = async function (req, res) {
   try {
-    var xmlFilePath;
+    console.log(req.body.inputQuery);
+    var xmlFilePath ;
     for (const zipName of req.body.inputQuery) {
       xmlFilePath = search(zipName.query, root); //Try to extract the file without unzipping the folder
       zipName.query = zipName.query.concat(".zip");
-      
+        
       subDecompress(testFolder, zipName.query, distFolder);
     }
     res.status(200).send({ xmlFilePath });
