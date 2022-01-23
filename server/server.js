@@ -1,9 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const bodyparser = require("body-parser");
-const ApiErrorHandler = require("./Errors/ApiErrorHandler");
-
+const bodyparser = require("body-parser")
 
 const ziprouter = require("./Routes/zipRoute");
 
@@ -22,7 +20,6 @@ app.get("/", (req, res) => {
 
 app.use("/", ziprouter);
 
-app.use(ApiErrorHandler);
 app.listen(port, () => {
   console.log("server started on port 5000");
 });
