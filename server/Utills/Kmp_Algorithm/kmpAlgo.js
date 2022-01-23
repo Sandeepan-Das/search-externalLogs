@@ -51,4 +51,4 @@ function KmpPatternMatching(text,pattern){
 
 }
 
-modules.export={KmpPatternMatching}
+module.exports={KmpPatternMatching}
