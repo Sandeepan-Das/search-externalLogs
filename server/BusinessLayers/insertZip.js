@@ -1,4 +1,5 @@
 const multer = require("multer");
+const ApiError = require("../Errors/ApiError");
 const diskStorage = "./SampleData";
 
 const storage = multer.diskStorage({
@@ -12,18 +13,20 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage }).single("zip");
 
-const insertZip = function (req, res) {
+const insertZip = function (req, res, next) {
   upload(req, res, function (err) {
     if (err instanceof multer.MulterError) {
       // A Multer error occurred when uploading.
-      res.status(400).json({ message: "Error Occurred while uploading." });
+      next(ApiError.badRequest("Error Occurred while uploading."));
     } else if (err) {
       // An unknown error occurred when uploading.
-      res.status(400).json({ message: "Bad Request." });
+      next({});
     }
-
     // Everything went fine.
-    if (!req.file) return res.json({ message: "File not choosen." });
+    if (!req.file) {
+      next(ApiError.badRequest("File not choosen."));
+      return;
+    }
     res.send("inserted successfully.");
   });
 };
