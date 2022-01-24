@@ -7,13 +7,18 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import BuildIcon from "@mui/icons-material/Build";
+import axios from "axios";
 
+const buildHandler = async () => {
+  const {data} = await axios.get("http://localhost:5000/build");
+  console.log(data);
+};
 export default function ButtonAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color="default">
         <Toolbar>
-          <Button variant="contained" startIcon={<BuildIcon />}>
+          <Button variant="contained" startIcon={<BuildIcon />} onClick={buildHandler}>
             Build
           </Button>
           <Typography
