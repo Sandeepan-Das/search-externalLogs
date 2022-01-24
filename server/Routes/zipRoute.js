@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var insertZip = require("../BusinessLayers/insertZip");
 var buildZip = require("../BusinessLayers/buildZip");
-var searchRoute = require("../BusinessLayers/search")
+var searchRoute = require("../BusinessLayers/searchZip")
 
 // insert zip route
 router.post("/insert", insertZip);
