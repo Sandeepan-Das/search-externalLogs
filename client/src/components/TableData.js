@@ -8,6 +8,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+
+
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -29,11 +32,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function TableData({datas}) {
+  const keys = Object.keys(datas.data);
+  console.log(keys);
   const dataArray = [];
   {for (const key in datas) {
     for (const innerKey in datas[key]) {
         dataArray.push(datas[key][innerKey])
     }
+    console.log(dataArray);
 }}
 
 
@@ -53,17 +59,30 @@ export default function TableData({datas}) {
         </TableHead>
         <TableBody>
         
-          {dataArray.map((data) => (
-            <StyledTableRow key={data.SERVICETAGFILENAME}>
+          {dataArray.map((data,index) => (
+            data.SERVICETAGFILENAME == 'Not Found' ? (
+              <StyledTableRow key={index}>
+
+              <StyledTableCell component="th" scope="row" sx={{color: 'red'}}>
+                {data.SERVICETAGFILENAME} - {keys[index]}
+              </StyledTableCell>
+              <StyledTableCell align="right">..</StyledTableCell>
+              <StyledTableCell align="right">..</StyledTableCell>
+              <StyledTableCell align="right">..</StyledTableCell>
+              <StyledTableCell align="right">..</StyledTableCell>
+              <StyledTableCell align="right">..</StyledTableCell>
+            </StyledTableRow>
+            ): (
+            <StyledTableRow key={index}>
               <StyledTableCell component="th" scope="row">
                 {data.SERVICETAGFILENAME}
               </StyledTableCell>
-              <StyledTableCell align="right">{data.BUSUNITID}</StyledTableCell>
-              <StyledTableCell align="right">{data.GPO_ORDER}</StyledTableCell>
-              <StyledTableCell align="right">{data.SALESORDNUM}</StyledTableCell>
-              <StyledTableCell align="right">{data.CUSNUM}</StyledTableCell>
-              <StyledTableCell align="right">{data.time}</StyledTableCell>
-            </StyledTableRow>
+              <StyledTableCell align="right">{data.BUSUNITID ? `${data.BUSUNITID}` : 'null'}</StyledTableCell>
+              <StyledTableCell align="right">{data.GPO_ORDER ? `${data.GPO_ORDER}` : 'null'}</StyledTableCell>
+              <StyledTableCell align="right">{data.SALESORDNUM ? `${data.SALESORDNUM}` : 'null'}</StyledTableCell>
+              <StyledTableCell align="right">{data.CUSNUM ? `${data.CUSNUM}` : 'null'}</StyledTableCell>
+              <StyledTableCell align="right">{data.time ? `${data.time}` : 'null'}</StyledTableCell>
+            </StyledTableRow>)
           ))} 
         </TableBody>
       </Table>
