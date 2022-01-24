@@ -13,12 +13,12 @@ const QueryInput = () => {
   const [inputQuery, setinputQuery] = useState([
     { id: uuidv4(), query: '' },
   ]);
-  const [tableData, settableData] = useState([]);
+  const [tableData, settableData] = useState({});
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { data } = await axios.post('http://localhost:5000/search', {inputQuery});
     console.log(data);
-    const updatedTable = [...tableData, data];
+    const updatedTable = {...tableData, data};
     settableData(updatedTable);
   };
 
@@ -74,8 +74,8 @@ const QueryInput = () => {
           endIcon={<Icon>send</Icon>}
         >Send</Button>
       </form>
-      <p>{tableData.length}</p>
-      {tableData.length > 0 ? (<TableData datas={tableData} />) : (null)}
+      
+      {Object.keys(tableData).length > 0 ? (<TableData datas={tableData} />) : (null)}
       
     </Container>
   );

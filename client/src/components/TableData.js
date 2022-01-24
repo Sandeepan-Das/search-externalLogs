@@ -29,6 +29,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function TableData({datas}) {
+  const dataArray = [];
+  {for (const key in datas) {
+    for (const innerKey in datas[key]) {
+        dataArray.push(datas[key][innerKey])
+    }
+}}
+
+
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -43,7 +52,8 @@ export default function TableData({datas}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {datas.map((data) => (
+        
+          {dataArray.map((data) => (
             <StyledTableRow key={data.SERVICETAGFILENAME}>
               <StyledTableCell component="th" scope="row">
                 {data.SERVICETAGFILENAME}
@@ -54,7 +64,7 @@ export default function TableData({datas}) {
               <StyledTableCell align="right">{data.CUSNUM}</StyledTableCell>
               <StyledTableCell align="right">{data.time}</StyledTableCell>
             </StyledTableRow>
-          ))}
+          ))} 
         </TableBody>
       </Table>
     </TableContainer>
