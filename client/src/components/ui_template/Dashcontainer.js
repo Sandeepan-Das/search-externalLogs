@@ -7,7 +7,6 @@ import Toolbar from "@mui/material/Toolbar";
 
 import Typography from "@mui/material/Typography";
 
-
 import { styled } from "@mui/material/styles";
 
 import ButtonAppBar from "./ButtonAppBar";
@@ -15,8 +14,6 @@ import BasicTable from "./BasicTable";
 import { Paper } from "@mui/material";
 
 import DrawerContainer from "./DrawerContainer";
-
-
 
 export default function Dashcontainer() {
   return (
@@ -39,8 +36,18 @@ export default function Dashcontainer() {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
         <ButtonAppBar />
-        <Paper elevation={4} sx={{ "margin-top": "20px", padding: "20px" }}>
-          <BasicTable />
+        <Paper
+          elevation={4}
+          sx={{ "margin-top": "20px", padding: "20px", minHeight: "40vh" }}
+        >
+          {/* <BasicTable /> */}
+          <div>
+            <img src="https://img.icons8.com/dotty/80/000000/empty-box.png" />
+            <Typography variant="h6">no data yet</Typography>
+            <Typography variant="subtitle2">
+              search your file to get data
+            </Typography>
+          </div>
         </Paper>
       </Box>
     </Box>

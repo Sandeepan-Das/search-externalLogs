@@ -84,11 +84,20 @@ function DrawerContainer() {
             </ListItemIcon>
             <ListItemText
               primary={fileName ? fileName : "Upload your logs"}
-              sx={{ textAlign: "center" }}
+              sx={{
+                textAlign: "center",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+              }}
             />
           </ListItem>
           <ListItem>
-            <Button fullWidth variant="contained" size="large" onClick={uploadHandler}>
+            <Button
+              fullWidth
+              variant="contained"
+              size="large"
+              onClick={uploadHandler}
+            >
               Insert
             </Button>
           </ListItem>
