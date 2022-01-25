@@ -13,8 +13,6 @@ import ButtonAppBar from "./ButtonAppBar";
 import BasicTable from "./BasicTable";
 import { Paper } from "@mui/material";
 
-import DrawerContainer from "./DrawerContainer";
-
 export default function Dashcontainer() {
   return (
     <Box sx={{ display: "flex" }}>
@@ -32,7 +30,6 @@ export default function Dashcontainer() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <DrawerContainer />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
         <ButtonAppBar />
