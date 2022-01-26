@@ -6,13 +6,16 @@ const serchDecompress = async (
   folderName,
   targetFolder
 ) => {
-  await decompress(`./${targetFolder}/${folderName}`, distFolder);
   var path;
   const zipLoc = xmlFilePath.split(".zip");
   for (let zipFile of zipLoc) {
-    if (zipFile[0] == "/") zipFile = zipFile.substring(1, zipFile.length);
     if (!zipFile.endsWith(".xml")) {
-      const res2 = await unzipSubFiles(distFolder, zipFile);
+      if (zipFile[0] == "/") {
+        zipFile = zipFile.substring(1, zipFile.length);
+        const res2 = await unzipSubFiles(distFolder, zipFile);
+      } else {
+        await decompress(`./${targetFolder}/${zipFile}.zip`, distFolder);
+      }
     } else {
       path = zipFile;
     }
@@ -25,7 +28,7 @@ const unzipSubFiles = async (distFolder, pathSubFile) => {
     `./${distFolder}/${pathSubFile}.zip`,
     distFolder
   ); //check path
-  
+
   return files;
 };
 
