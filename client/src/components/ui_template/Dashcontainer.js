@@ -8,12 +8,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
 import { styled } from "@mui/material/styles";
-
+import { useSelector } from "react-redux";
 import ButtonAppBar from "./ButtonAppBar";
 import BasicTable from "./BasicTable";
 import { Paper } from "@mui/material";
+import TableData from "../TableData";
 
 export default function Dashcontainer() {
+  const tables = useSelector((state) => state.table);
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -37,14 +39,16 @@ export default function Dashcontainer() {
           elevation={4}
           sx={{ "margin-top": "20px", padding: "20px", minHeight: "40vh" }}
         >
-          {/* <BasicTable /> */}
-          <div>
-            <img src="https://img.icons8.com/dotty/80/000000/empty-box.png" />
-            <Typography variant="h6">no data yet</Typography>
-            <Typography variant="subtitle2">
-              search your file to get data
-            </Typography>
-          </div>
+          
+          {Object.keys(tables).length ? (<TableData datas={tables} />) : (
+            <div> 
+              <img src="https://img.icons8.com/dotty/80/000000/empty-box.png" />
+              <Typography variant="h6">no data yet</Typography>
+              <Typography variant="subtitle2">
+                search your file to get data
+              </Typography>
+            </div>
+          )}
         </Paper>
       </Box>
     </Box>
