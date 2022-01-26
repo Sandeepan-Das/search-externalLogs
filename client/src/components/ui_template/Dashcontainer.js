@@ -14,11 +14,12 @@ import BasicTable from "./BasicTable";
 import { Paper } from "@mui/material";
 import TableData from "../TableData";
 import SnackBar from "./SnackBar";
+import Footer from "./Footer";
 
 export default function Dashcontainer() {
   const tables = useSelector((state) => state.table);
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <SnackBar />
       <CssBaseline />
       <AppBar
@@ -29,8 +30,17 @@ export default function Dashcontainer() {
         }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h5" noWrap component="div">
             Search-external logs
+          </Typography>
+          <Typography
+            align="right"
+            noWrap
+            variant="overline"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
+            Team : Boolean Bandits
           </Typography>
         </Toolbar>
       </AppBar>
@@ -54,6 +64,7 @@ export default function Dashcontainer() {
           )}
         </Paper>
       </Box>
+      <Footer />
     </Box>
   );
 }

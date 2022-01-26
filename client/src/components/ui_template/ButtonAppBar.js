@@ -37,7 +37,15 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color="default">
         <Toolbar>
-          <FormControl fullWidth sx={{ mr: 20 }} variant="standard">
+          <FormControl
+            sx={{
+              width: "85%",
+              marginBottom: "16px",
+              paddingTop: "3px",
+              paddingBottom: "3px",
+            }}
+            variant="standard"
+          >
             <TextField
               variant="standard"
               label="Query"
@@ -55,10 +63,11 @@ export default function ButtonAppBar() {
           </FormControl>
 
           <Typography
-            variant="subtitle1"
+            variant="overline"
+            noWrap
+            align="right"
+            sx={{ flexGrow: 1 }}
             component="div"
-
-            //align="center"
           >
             time elapsed
           </Typography>
