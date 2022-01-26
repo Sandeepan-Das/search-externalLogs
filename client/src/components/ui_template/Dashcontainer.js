@@ -14,9 +14,18 @@ import BasicTable from "./BasicTable";
 import { Paper } from "@mui/material";
 import TableData from "../TableData";
 import SnackBar from "./SnackBar";
+import dellLogo from '../../images/dell-logo.png';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  img: {
+    margin: '60px 0px',
+  }
+}));
 
 export default function Dashcontainer() {
   const tables = useSelector((state) => state.table);
+  const classes = useStyles();
   return (
     <Box sx={{ display: "flex" }}>
       <SnackBar />
@@ -25,12 +34,16 @@ export default function Dashcontainer() {
         position="fixed"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 1,
-          background: "#424242",
+          background: "#3d5afe",
         }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Search-external logs
+          <div >
+            <img src={dellLogo} alt="icon" height="40px"/>
+          </div>
+        
+          <Typography variant="h6" noWrap component="div" sx={{"margin-left" : "10px"}}>
+                 Search-External Logs
           </Typography>
         </Toolbar>
       </AppBar>
@@ -39,12 +52,12 @@ export default function Dashcontainer() {
         <ButtonAppBar />
         <Paper
           elevation={4}
-          sx={{ "margin-top": "20px", padding: "20px", minHeight: "40vh" }}
+          sx={{ "margin-top": "20px", padding: "20px", minHeight: "65vh" }}
         >
           {Object.keys(tables).length ? (
             <TableData datas={tables} />
           ) : (
-            <div>
+            <div className={classes.img}>
               <img src="https://img.icons8.com/dotty/80/000000/empty-box.png" />
               <Typography variant="h6">no data yet</Typography>
               <Typography variant="subtitle2">

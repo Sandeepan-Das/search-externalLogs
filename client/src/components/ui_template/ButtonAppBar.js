@@ -14,20 +14,11 @@ import { getTableData } from "../../actions/table";
 
 export default function ButtonAppBar() {
   const dispatch = useDispatch();
-  const [queryInput, setQueryInput] = useState("");
+  const [inputQuery, setInputQuery] = useState("");
 
-  const handleSubmit = async () => {
-    var array = queryInput.split(",");
-    var inputQuery = [];
-
-    for (var i = 0; i < array.length; i++) {
-      var o = {};
-      o["query"] = array[i];
-      inputQuery.push(o);
-    }
-
-    if (queryInput) {
-      dispatch(getTableData(inputQuery));
+  const handleSubmit = async () => {   
+    if (inputQuery) {
+      dispatch(getTableData(inputQuery.replaceAll(' ','')));
     } else {
       console.log("string not found.");
     }
@@ -41,7 +32,7 @@ export default function ButtonAppBar() {
             <TextField
               variant="standard"
               label="Query"
-              onChange={(e) => setQueryInput(e.target.value)}
+              onChange={(e) => setInputQuery(e.target.value)}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
