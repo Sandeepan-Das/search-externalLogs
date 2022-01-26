@@ -13,11 +13,13 @@ import ButtonAppBar from "./ButtonAppBar";
 import BasicTable from "./BasicTable";
 import { Paper } from "@mui/material";
 import TableData from "../TableData";
+import SnackBar from "./SnackBar";
 
 export default function Dashcontainer() {
   const tables = useSelector((state) => state.table);
   return (
     <Box sx={{ display: "flex" }}>
+      <SnackBar />
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -39,9 +41,10 @@ export default function Dashcontainer() {
           elevation={4}
           sx={{ "margin-top": "20px", padding: "20px", minHeight: "40vh" }}
         >
-          
-          {Object.keys(tables).length ? (<TableData datas={tables} />) : (
-            <div> 
+          {Object.keys(tables).length ? (
+            <TableData datas={tables} />
+          ) : (
+            <div>
               <img src="https://img.icons8.com/dotty/80/000000/empty-box.png" />
               <Typography variant="h6">no data yet</Typography>
               <Typography variant="subtitle2">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,21 +14,25 @@ import { getTableData } from "../../actions/table";
 
 export default function ButtonAppBar() {
   const dispatch = useDispatch();
-  const [queryInput, setQueryInput] = useState('');
+  const [queryInput, setQueryInput] = useState("");
 
   const handleSubmit = async () => {
-    var array = queryInput.split(',');
+    var array = queryInput.split(",");
     var inputQuery = [];
 
-    for (var i = 0; i < array.length; i ++) {
+    for (var i = 0; i < array.length; i++) {
       var o = {};
       o["query"] = array[i];
       inputQuery.push(o);
     }
 
-    dispatch(getTableData(inputQuery));
+    if (queryInput) {
+      dispatch(getTableData(inputQuery));
+    } else {
+      console.log("string not found.");
+    }
   };
- 
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color="default">
@@ -42,7 +46,7 @@ export default function ButtonAppBar() {
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton edge="end" color="primary">
-                      <SearchSharpIcon onClick={handleSubmit}/>
+                      <SearchSharpIcon onClick={handleSubmit} />
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -53,8 +57,8 @@ export default function ButtonAppBar() {
           <Typography
             variant="subtitle1"
             component="div"
-            
-           //align="center"
+
+            //align="center"
           >
             time elapsed
           </Typography>
