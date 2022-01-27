@@ -16,9 +16,9 @@ export default function ButtonAppBar() {
   const dispatch = useDispatch();
   const [inputQuery, setInputQuery] = useState("");
 
-  const handleSubmit = async () => {   
+  const handleSubmit = async () => {
     if (inputQuery) {
-      dispatch(getTableData(inputQuery.replaceAll(' ','')));
+      dispatch(getTableData(inputQuery.replaceAll(" ", "")));
     } else {
       console.log("string not found.");
     }
@@ -28,10 +28,18 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color="default">
         <Toolbar>
-          <FormControl fullWidth sx={{ mr: 20 }} variant="standard">
+          <FormControl
+            sx={{
+              width: "85%",
+              marginBottom: "16px",
+              paddingTop: "3px",
+              paddingBottom: "3px",
+            }}
+            variant="standard"
+          >
             <TextField
               variant="standard"
-              label="Query"
+              label="Service Tag"
               onChange={(e) => setInputQuery(e.target.value)}
               InputProps={{
                 endAdornment: (
@@ -43,13 +51,21 @@ export default function ButtonAppBar() {
                 ),
               }}
             />
+            <Typography
+              variant="subtitle2"
+              align="left"
+              sx={{ marginTop: "10px", color: "#ff5252" }}
+            >
+              [use comma(,) for multiple ServiceTags without spaces.]
+            </Typography>
           </FormControl>
 
           <Typography
-            variant="subtitle1"
+            variant="overline"
+            noWrap
+            align="right"
+            sx={{ flexGrow: 1 }}
             component="div"
-
-            //align="center"
           >
             time elapsed
           </Typography>

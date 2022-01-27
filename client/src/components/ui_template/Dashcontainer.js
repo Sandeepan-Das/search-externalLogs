@@ -14,36 +14,51 @@ import BasicTable from "./BasicTable";
 import { Paper } from "@mui/material";
 import TableData from "../TableData";
 import SnackBar from "./SnackBar";
-import dellLogo from '../../images/dell-logo.png';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
+import Footer from "./Footer";
+import DellLogo from "./dellLogo";
 
 const useStyles = makeStyles((theme) => ({
   img: {
-    margin: '60px 0px',
-  }
+    margin: "150px 0px",
+  },
 }));
 
 export default function Dashcontainer() {
   const tables = useSelector((state) => state.table);
   const classes = useStyles();
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <SnackBar />
       <CssBaseline />
       <AppBar
         position="fixed"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 1,
-          background: "#3d5afe",
+          background: "#01579b",
         }}
       >
         <Toolbar>
-          <div >
-            <img src={dellLogo} alt="icon" height="40px"/>
+          <div>
+            <DellLogo />
           </div>
-        
-          <Typography variant="h6" noWrap component="div" sx={{"margin-left" : "10px"}}>
-                 Search-External Logs
+
+          <Typography
+            variant="h5"
+            noWrap
+            component="div"
+            sx={{ "margin-left": "10px" }}
+          >
+            Search-External Logs
+          </Typography>
+          <Typography
+            align="right"
+            noWrap
+            variant="subtitle1"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
+            Team : Boolean Bandits
           </Typography>
         </Toolbar>
       </AppBar>
@@ -67,6 +82,7 @@ export default function Dashcontainer() {
           )}
         </Paper>
       </Box>
+      <Footer />
     </Box>
   );
 }
