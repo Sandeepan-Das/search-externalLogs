@@ -11,7 +11,7 @@ router.post("/insert", insertZip);
 router.get("/build", buildZip);
 
 //search query
-router.post("/search", searchRoute);
+router.get("/search/:word?", searchRoute);
 
 router.get("/autoFill/:word?",autoFill);
 

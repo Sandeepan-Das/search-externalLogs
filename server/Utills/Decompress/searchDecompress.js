@@ -1,5 +1,8 @@
 const decompress = require("decompress");
-const { parsing } = require("../Parse/searchParse");
+const fs = require('fs');
+const {
+  parsing
+} = require("../Parse/searchParse");
 const serchDecompress = async (
   xmlFilePath,
   distFolder,
@@ -14,7 +17,8 @@ const serchDecompress = async (
         zipFile = zipFile.substring(1, zipFile.length);
         const res2 = await unzipSubFiles(distFolder, zipFile);
       } else {
-        await decompress(`./${targetFolder}/${zipFile}.zip`, distFolder);
+        if (!fs.existsSync(`./${distFolder}/${zipFile}`))
+          await decompress(`./${targetFolder}/${zipFile}.zip`, distFolder);
       }
     } else {
       path = zipFile;
@@ -24,12 +28,19 @@ const serchDecompress = async (
   return result;
 };
 const unzipSubFiles = async (distFolder, pathSubFile) => {
-  const files = await decompress(
-    `./${distFolder}/${pathSubFile}.zip`,
-    distFolder
-  ); //check path
+  var files
+  var currentZip = pathSubFile.split("/")
+  if (!fs.existsSync(`./${distFolder}/${currentZip[currentZip.length-1]}`)) {
+
+    files = await decompress(
+      `./${distFolder}/${pathSubFile}.zip`,
+      distFolder
+    ); //check path
+  }
 
   return files;
 };
 
-module.exports = { serchDecompress };
+module.exports = {
+  serchDecompress
+};
