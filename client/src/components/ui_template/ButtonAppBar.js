@@ -11,21 +11,25 @@ import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import { InputAdornment, FormControl } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import { getTableData } from "../../actions/table";
+import Alert from '@mui/material/Alert';
 
 export default function ButtonAppBar() {
   const dispatch = useDispatch();
   const [inputQuery, setInputQuery] = useState("");
+  const [errorDisplay, seterrorDisplay] = useState(false);
 
   const handleSubmit = async () => {
     if (inputQuery) {
       dispatch(getTableData(inputQuery.replaceAll(" ", "")));
     } else {
-      console.log("string not found.");
+      seterrorDisplay(true);
+      setTimeout(function() { seterrorDisplay(false); }, 4000);
     }
   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
+      {errorDisplay && <Alert severity="error">Please insert the service tags</Alert>}
       <AppBar position="static" color="default">
         <Toolbar>
           <FormControl
