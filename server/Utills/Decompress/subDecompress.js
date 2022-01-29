@@ -26,7 +26,7 @@ const subDecompress = async (dataFolder, folder, distFolder) => {
       }
     }
   }
-  console.log(zipFolderNames);
+  
   return {xmlFilePath,zipFolderNames};
 };
 const unzipSubFiles = async (distFolder, pathSubFile) => {

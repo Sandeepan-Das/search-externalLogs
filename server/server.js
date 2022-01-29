@@ -6,7 +6,8 @@ const ApiErrorHandler = require("./Errors/ApiErrorHandler");
 
 
 const ziprouter = require("./Routes/zipRoute");
-
+const cron = require("./Utills/cron/unzip")
+const cron2 = require("./Utills/cron/delDist")
 const port = process.env.PORT || 5000;
 var corsOptions = {
   origin: "http://localhost:3000"
