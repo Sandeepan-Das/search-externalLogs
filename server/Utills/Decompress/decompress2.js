@@ -21,7 +21,7 @@ const decompression = async (dataFolder, distFolder, root) => {
         const folders = fs.readdirSync(dataFolder);
 
         for (const folder of folders) {
-            if (search(folder.split(".")[0], root) == "Not Found") {
+            if (search(folder.split(".")[0], root) == "Not Found" || !fs.existsSync(`${distFolder}/${folder.split(".")[0]}`)) {
                 insert(folder.split(".")[0], root, {
                     path: `Unzipped`,
                     time: "time",
@@ -54,5 +54,5 @@ const decompression = async (dataFolder, distFolder, root) => {
 
 module.exports = {
     decompression,
-    root,
+ 
 };

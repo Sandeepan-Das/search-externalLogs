@@ -7,7 +7,7 @@ const subDecompress = async (dataFolder, folder, distFolder) => {
   zipFolderNames[folder.split(".")[0]] = true;
   for (const xmlFile of files) {
     if (xmlFile.type === "file") {
-      if (!xmlFile.finalPath) xmlFile.finalPath = `${folder}/${xmlFile.path}`;
+      // if (!xmlFile.finalPath) xmlFile.finalPath = `${folder}/${xmlFile.path}`;
       if (xmlFile.path.endsWith(".zip")) {
         var currentZip =xmlFile.path.split("/") 
         
@@ -15,12 +15,12 @@ const subDecompress = async (dataFolder, folder, distFolder) => {
         const newSubFile = await unzipSubFiles(distFolder, xmlFile.path);
         for (const subFile of newSubFile) {
           if (subFile.type === "file") {
-            subFile.finalPath = `${xmlFile.finalPath}/${subFile.path}`;
+            // subFile.finalPath = `${xmlFile.finalPath}/${subFile.path}`;
 
             files.push(subFile);
           }
         }
-      } else {
+      } else if(xmlFile.path.endsWith(".xml")){
         // if (!xmlFile.finalPath) xmlFile.finalPath = xmlFile.path;
         xmlFilePath.push(xmlFile);
       }
