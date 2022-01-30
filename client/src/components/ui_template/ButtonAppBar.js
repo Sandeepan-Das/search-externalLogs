@@ -34,7 +34,7 @@ export default function ButtonAppBar() {
         <Toolbar>
           <FormControl
             sx={{
-              width: "85%",
+              width: "100%",
               marginBottom: "16px",
               paddingTop: "3px",
               paddingBottom: "3px",
@@ -63,16 +63,6 @@ export default function ButtonAppBar() {
               [use comma(,) for multiple ServiceTags without spaces.]
             </Typography>
           </FormControl>
-
-          <Typography
-            variant="overline"
-            noWrap
-            align="right"
-            sx={{ flexGrow: 1 }}
-            component="div"
-          >
-            time elapsed
-          </Typography>
         </Toolbar>
       </AppBar>
     </Box>
